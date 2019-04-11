@@ -21,7 +21,7 @@ int main()
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
 	close(STDERR_FILENO);
-	fd=fopen("/home/kulin/1RV17IS016/usp/hello.txt","w");
+	fd=fopen("/home/path/1R/usp/hello.txt","w");
 	while(1)
 	{
 		fprintf(fd,"Running\n");
