@@ -1,36 +1,30 @@
-#include<stdio.h>
-#include<sys/stat.h>
-#include<sys/types.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-int main(int argc, char **argv)
+
+int main(int argc,char *argv[])
 {
-	int i;
-	struct stat filename;
-	if(argc == 1)
+	struct stat statv;
+
+	for(int i = 1;i < argc;i++)
 	{
-		printf("\nGive File name\n");
-		return 0;
-	}
-	for(i=1;i<argc;i++)
-	{
-		printf("%20s",argv[i]);
-		lstat(argv[i],&filename);
+		lstat(argv[i] , &statv);
 		
-		if(S_ISREG(filename.st_mode))
-			printf("\tRegular file\n");
-			
-		else if(S_ISDIR(filename.st_mode))
-			printf("\tDirectory file\n");
-			
-		else if(S_ISBLK(filename.st_mode))
-			printf("\tBlock file\n");
-			
-		else if(S_ISCHR(filename.st_mode))
-			printf("\tCharacter file\n");
-			
-		else if(S_ISLNK(filename.st_mode))
-			printf("\tLink file\n");
+		if(S_ISREG(statv.st_mode))
+			printf("Regular file");
+		if(S_ISBLK(statv.st_mode))
+			printf("Block Device file");
+		if(S_ISCHR(statv.st_mode))
+			printf("character file");
+		if(S_ISFIFO(statv.st_mode))
+			printf("Fifo file");
+		if(S_ISDIR(statv.st_mode))
+			printf("directory");
+		if(S_ISLNK(statv.st_mode))
+			printf("LINK");
 	}
-	
 	return 0;
 }
+
